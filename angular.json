@@ -91,7 +91,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "heroku-postbuild": "ng build --prod"
+            ]
           }
         },
         "lint": {
