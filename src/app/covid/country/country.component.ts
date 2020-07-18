@@ -30,7 +30,7 @@ export class CountryComponent implements OnInit {
     }
   };
   public barChartLabels: Label[] = ['FEB','MAR','APR','MAY','JUN','JUL'];
-  public barChartType: ChartType = 'bar';
+  public barChartType: ChartType = 'line';
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
