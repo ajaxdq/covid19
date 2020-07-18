@@ -1,43 +1,43 @@
 <div style="margin-top: 5%;">
-    <!-- <div class="row">
-        <label for="selector" style="padding-right:1em;">Choose a country: </label>
-        <select name="selector" (ngModelChange)="selectChangeHandler($event)" [ngModel]="cv">
-            <option *ngFor="let x of cv" [ngValue]="x">{{x.Country}}</option>
-        </select>
-    </div> -->
+  <label for="selector" style="padding-right:1em;">Choose a country: </label>
+  <select name="selector" (ngModelChange)="selectChangeHandler($event)" [ngModel]="cv">
+    <option *ngFor="let x of cv" [ngValue]="x">{{x.Country}}</option>
+  </select>
+
+  <div *ngIf="show">
+    <app-country [cv2]="cv2"></app-country>
+  </div>
 
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">&#9961;</th>
-          <th scope="col" >Country</th>
-          <th scope="col" >NewConfirmed</th>
-          <th scope="col">TotalConfirmed</th>
-          <th scope="col">NewDeaths</th>
-          <th scope="col">TotalDeaths</th>
-          <th scope="col">NewRecovered</th>
-          <th scope="col">TotalRecovered</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let x of cv; index as i">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>            <img [src]="'https://www.countryflags.io/'+x.CountryCode+'/shiny/64.png'" class="mr-2" style="width: 20px">
-          </td>
-          <td>
-            {{ x.Country }}
-          </td>
-          <td>{{ x.NewConfirmed }}</td>
-          <td>{{ x.TotalConfirmed }}</td>
-          <td>{{ x.NewDeaths }}</td>
-          <td>{{ x.TotalDeaths }}</td>
-          <td>{{ x.NewRecovered }}</td>
-          <td>{{ x.TotalRecovered }}</td>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">&#9961;</th>
+        <th scope="col">Country</th>
+        <th scope="col">NewConfirmed</th>
+        <th scope="col">TotalConfirmed</th>
+        <th scope="col">NewDeaths</th>
+        <th scope="col">TotalDeaths</th>
+        <th scope="col">NewRecovered</th>
+        <th scope="col">TotalRecovered</th>
 
-        </tr>
-        </tbody>
-      </table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of cv; index as i"  (click)="clicker(x)">
+        <th scope="row">{{ i + 1 }}</th>
+        <td> <img [src]="'https://www.countryflags.io/'+x.CountryCode+'/shiny/64.png'" class="mr-2" style="width: 20px"></td>
+        <td>{{ x.Country }}</td>
+        <td>{{ x.NewConfirmed }}</td>
+        <td>{{ x.TotalConfirmed }}</td>
+        <td>{{ x.NewDeaths }}</td>
+        <td>{{ x.TotalDeaths }}</td>
+        <td>{{ x.NewRecovered }}</td>
+        <td>{{ x.TotalRecovered }}</td>
+
+      </tr>
+    </tbody>
+  </table>
 </div>

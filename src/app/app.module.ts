@@ -19,6 +19,8 @@ import { CloseAlert } from './directive/close.directive'
 import { FormsModule } from '@angular/forms';
 import { CovidComponent } from './covid/covid.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CountryComponent } from './covid/country/country.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     HomeComponent,
     CloseAlert,
-    CovidComponent
+    CovidComponent,
+    CountryComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { CovidComponent } from './covid/covid.component';
+import { CountryComponent } from './covid/country/country.component';
+
 
 
 const routes: Routes =[
@@ -12,6 +14,8 @@ const routes: Routes =[
   {path: 'home' ,component:HomeComponent},
   {path: 'register' ,component:RegisterComponent},
   {path: 'covid' ,component:CovidComponent},
+  {path: 'covid/:id' ,component:CountryComponent},
+
 
 
 
