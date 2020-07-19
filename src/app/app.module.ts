@@ -24,6 +24,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/login/auh.guard';
 import { CookDashComponent } from './cook-dash/cook-dash.component';
+import { PageNotFoundComponent } from './misc/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CookDashComponent } from './cook-dash/cook-dash.component';
     CloseAlert,
     CovidComponent,
     CountryComponent,
-    CookDashComponent
+    CookDashComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

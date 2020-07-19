@@ -6,9 +6,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { CovidComponent } from './covid/covid.component';
 import { CountryComponent } from './covid/country/country.component';
 import { AuthGuard } from './auth/login/auh.guard';
-
-
-
+import { PageNotFoundComponent } from './misc/page-not-found/page-not-found.component';
 
 const routes: Routes =[
   {path:'', redirectTo:'home', pathMatch:'full'},
@@ -19,13 +17,8 @@ const routes: Routes =[
   {path: 'home/:id',
   canActivate: [AuthGuard],
   component:HomeComponent},
-
-
-
-
+  {path:'**',component:PageNotFoundComponent}
 ];
-
-
 
 @NgModule({
   declarations: [],
