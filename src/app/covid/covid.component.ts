@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,12 @@ export class CovidComponent implements OnInit {
   cv2;
   show = false;
   details;
+  token = localStorage.getItem('access_token');
+  alert = false;
+
+  @Input() countryName: any;
+
+
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
@@ -19,6 +25,10 @@ export class CovidComponent implements OnInit {
     this.http.get<any>('https://api.covid19api.com/summary').subscribe(data => {
       this.cv = data.Countries;
       // console.log(this.cv);
+      if(this.countryName){
+        console.log(this.countryName);
+        this.fetchCountryByName(this.countryName);
+      }
     })
 
   }
@@ -28,26 +38,47 @@ export class CovidComponent implements OnInit {
     //document.getElementById("na").innerHTML = event;
     // console.log(event);
     // this.router.navigate(['/covid',event.Country])
-    this.show = false;
-    this.http.get<any>('https://api.covid19api.com/dayone/country/'+event.Slug).subscribe(data => {
-      this.cv2 = data;
-      // console.log("ghv",this.cv2);
-      this.show = true;
-    })
     // this.details = event;
+
+    this.fetchCountryDetails(event);
+
 
   }
 
   clicker(x: any) {
-    // console.log(x);
-    this.show = false;
-    this.http.get<any>('https://api.covid19api.com/dayone/country/'+x.Slug).subscribe(data => {
-      this.cv2 = data;
-      // console.log("ghv",this.cv2);
-      this.show = true;
-      window.scrollTo(0, 0);
-    })
+    this.fetchCountryDetails(x);
+  }
 
+  fetchCountryDetails(id :any){ 
+    if(this.token){
+      this.show = false;
+      this.http.get<any>('https://api.covid19api.com/total/dayone/country/'+id.Slug).subscribe(data => {
+        this.cv2 = data;
+        this.show = true;
+        window.scrollTo(0, 0);
+      })
+    } else {
+      this.alert = true;
+    }
+
+  }
+
+
+  fetchCountryByName(name: any){
+    if(this.token){
+      this.show = false;
+      this.http.get<any>('https://api.covid19api.com/total/dayone/country/'+name).subscribe(data => {
+        this.cv2 = data;
+        this.show = true;
+        window.scrollTo(0, 0);
+      })
+    } else {
+      this.alert = true;
+    }
+  }
+
+  alertClose(){
+    this.alert = false;
   }
 
 }

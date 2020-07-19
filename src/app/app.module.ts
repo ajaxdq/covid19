@@ -21,6 +21,9 @@ import { CovidComponent } from './covid/covid.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CountryComponent } from './covid/country/country.component';
 import { ChartsModule } from 'ng2-charts';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './auth/login/auh.guard';
+import { CookDashComponent } from './cook-dash/cook-dash.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { ChartsModule } from 'ng2-charts';
     HomeComponent,
     CloseAlert,
     CovidComponent,
-    CountryComponent
+    CountryComponent,
+    CookDashComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ import { ChartsModule } from 'ng2-charts';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [ AuthGuard, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

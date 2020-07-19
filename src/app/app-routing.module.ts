@@ -5,16 +5,20 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { CovidComponent } from './covid/covid.component';
 import { CountryComponent } from './covid/country/country.component';
+import { AuthGuard } from './auth/login/auh.guard';
+
 
 
 
 const routes: Routes =[
-  {path:'', redirectTo:'covid', pathMatch:'full'},
+  {path:'', redirectTo:'home', pathMatch:'full'},
   {path: 'login' ,component:LoginComponent},
   {path: 'home' ,component:HomeComponent},
-  {path: 'register' ,component:RegisterComponent},
-  {path: 'covid' ,component:CovidComponent},
-  {path: 'covid/:id' ,component:CountryComponent},
+  // {path: 'register' ,component:RegisterComponent},
+  // {path: 'covid' ,component:CovidComponent},
+  {path: 'home/:id',
+  canActivate: [AuthGuard],
+  component:HomeComponent},
 
 
 
