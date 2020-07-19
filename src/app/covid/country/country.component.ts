@@ -63,10 +63,10 @@ export class CountryComponent implements OnInit {
       }
     };
     this.barChartData = [
-      { data: this.Confirmed, label: 'Confirmed' },
+      { data: this.Confirmed, label: 'Cases' },
       { data: this.Active, label: 'Active' },
-      { data: this.Recovered, label: 'Recovered' },
-      { data: this.Deaths, label: 'Deaths' }
+      { data: this.Recovered, label: 'Recover' },
+      { data: this.Deaths, label: 'Death' }
 
     ];
   }
