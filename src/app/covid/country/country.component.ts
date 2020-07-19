@@ -13,6 +13,7 @@ export class CountryComponent implements OnInit {
   Confirmed;
   Deaths;
   Recovered;
+  Active;
   Date;
 
 
@@ -34,37 +35,40 @@ export class CountryComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data: [], label: 'Confirmed' },
+    { data: [], label: 'Active' },
     { data: [], label: 'Recovered' },
     { data: [], label: 'Deaths' }
 
   ];
 
-  constructor( private activateRouter:ActivatedRoute) { }
+  constructor(private activateRouter: ActivatedRoute) { }
 
   @Input() cv2: any;
 
   ngOnInit(): void {
 
-      this.Confirmed = this.cv2.map(({ Confirmed }) => Confirmed);
-      this.Recovered = this.cv2.map(({ Recovered }) => Recovered);
-      this.Deaths = this.cv2.map(({ Deaths }) => Deaths);
+    this.Confirmed = this.cv2.map(({ Confirmed }) => Confirmed);
+    this.Active = this.cv2.map(({ Active }) => Active);
+    this.Recovered = this.cv2.map(({ Recovered }) => Recovered);
+    this.Deaths = this.cv2.map(({ Deaths }) => Deaths);
 
-      this.Date = this.cv2.map(({Date}) => Date);
-      // this.Confirmed = this.Confirmed.map(String);
-      // console.log(this.Confirmed);
-      this.barChartLabels = this.Date;
-      this.barChartOptions = {
-        title: {
-          text: this.cv2[0].Country,
-          display: true
-        }
-      };
-      this.barChartData = [
-        {data:this.Confirmed,label:'Confirmed'},
-        { data: this.Recovered, label: 'Recovered' },
-        { data: this.Deaths, label: 'Deaths' }
+    this.Date = this.cv2.map(({ Date }) => Date);
+    // this.Confirmed = this.Confirmed.map(String);
+    // console.log(this.Confirmed);
+    this.barChartLabels = this.Date;
+    this.barChartOptions = {
+      title: {
+        text: this.cv2[0].Country,
+        display: true
+      }
+    };
+    this.barChartData = [
+      { data: this.Confirmed, label: 'Confirmed' },
+      { data: this.Active, label: 'Active' },
+      { data: this.Recovered, label: 'Recovered' },
+      { data: this.Deaths, label: 'Deaths' }
 
-      ];
+    ];
   }
 
 }
