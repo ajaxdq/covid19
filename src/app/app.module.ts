@@ -25,6 +25,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/login/auh.guard';
 import { CookDashComponent } from './cook-dash/cook-dash.component';
 import { PageNotFoundComponent } from './misc/page-not-found/page-not-found.component';
+import { AddCountryComponent } from './covid/add-country/add-country.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PageNotFoundComponent } from './misc/page-not-found/page-not-found.comp
     CovidComponent,
     CountryComponent,
     CookDashComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddCountryComponent
   ],
   imports: [
     BrowserModule,

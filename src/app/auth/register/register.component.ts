@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 
 
 @Component({
@@ -9,14 +11,21 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   
-  arr: string[] = ["0", "1", "2", "3"];
 
   constructor(private router: Router) {}
 
   
     ngOnInit(): void {
     }
+    signup(form: NgForm) {
+      // console.log(form.controls['name'].value);
+      // console.log(form.controls['password'].value);
+      if(form.controls['name'].value == "covid" && form.controls['password'].value == "covid") {
+        localStorage.setItem('access_token', "jwt_token");
+        this.router.navigateByUrl('/home');
+      }
   
+    }
 
 
 

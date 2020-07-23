@@ -1,6 +1,6 @@
 <div style="height: 100%;margin: 0;position: absolute;width: 100%;background-image: url('https://picjumbo.com/wp-content/uploads/macbook-laptop-2210x1473.jpg');">
-    <div class="col-sm-3"
-        style="margin: 5%;border-left: 6px solid red;background-color: #eeeeee;padding: 20px;padding-bottom: 40px;">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xs-10"
+        style="margin: 5%;border-left: 6px solid red;background-color: #f6f6f6;padding: 20px;padding-bottom: 40px;">
         <h2 style="font-style: bold;padding-bottom: 20px;text-align: center;">LOGIN</h2>
         <form #myform="ngForm" (ngSubmit)="login(myform)" class="form form-register">
             <div class="form-group">
@@ -14,7 +14,9 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" ngModel
                     required>
             </div>
-            <button type="submit" class="btn btn-primary" style="float: right;">Submit</button>
+            <button type="submit" [disabled]="!myform.valid" class="btn btn-primary" style="float: right;">Login</button>
+            <button class="btn btn-success" [routerLink]="['/register']" style="float: right;margin-right: 10px;">Register</button>
+
         </form>
     </div>
 </div>

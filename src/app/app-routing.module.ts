@@ -12,7 +12,7 @@ const routes: Routes =[
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path: 'login' ,component:LoginComponent},
   {path: 'home' ,component:HomeComponent},
-  // {path: 'register' ,component:RegisterComponent},
+  {path: 'register' ,component:RegisterComponent},
   // {path: 'covid' ,component:CovidComponent},
   {path: 'home/:id',
   canActivate: [AuthGuard],
