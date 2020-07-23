@@ -26,9 +26,21 @@ export class LoginComponent implements OnInit {
   login(form: NgForm) {
     // console.log(form.controls['name'].value);
     // console.log(form.controls['password'].value);
-    if(form.controls['name'].value == "covid" && form.controls['password'].value == "covid") {
+    // if(form.controls['name'].value == "covid" && form.controls['password'].value == "covid") {
+    //   localStorage.setItem('access_token', "jwt_token");
+    //   this.router.navigateByUrl('/home');
+    // }
+
+    let users = JSON.parse(localStorage.getItem('users'));
+
+    let userFound = users.find(obj => {
+      return (obj.email == form.controls['email'].value && obj.password == form.controls['password'].value);
+    })
+    if (userFound) {
       localStorage.setItem('access_token', "jwt_token");
       this.router.navigateByUrl('/home');
+    } else {
+
     }
 
   }

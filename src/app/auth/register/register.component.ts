@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 
 @Component({
@@ -10,24 +9,32 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  
+  signUpForm: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.signUpForm = new FormGroup({
+      email: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+      designation: new FormControl('private'),
+      sector: new FormControl()
+    })
+  }
+
+
+  signup() {
+    console.log(this.signUpForm.value);
+    if (localStorage.getItem('users')) {
+      let users = JSON.parse(localStorage.getItem('users'));
+      users.push(this.signUpForm.value);
+      localStorage.setItem('users', JSON.stringify(users));
+    } else {
+      let users = [];
+      users.push(this.signUpForm.value);
+      localStorage.setItem('users', JSON.stringify(users));
     }
-    signup(form: NgForm) {
-      // console.log(form.controls['name'].value);
-      // console.log(form.controls['password'].value);
-      if(form.controls['name'].value == "covid" && form.controls['password'].value == "covid") {
-        localStorage.setItem('access_token', "jwt_token");
-        this.router.navigateByUrl('/home');
-      }
-  
-    }
-
-
-
+  }
 
 }
+

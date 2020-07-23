@@ -16,7 +16,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
 
 import { CloseAlert } from './directive/close.directive'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CovidComponent } from './covid/covid.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CountryComponent } from './covid/country/country.component';
@@ -52,7 +52,8 @@ import { AddCountryComponent } from './covid/add-country/add-country.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
   ],
   providers: [ AuthGuard, AuthService ],
   bootstrap: [AppComponent]
