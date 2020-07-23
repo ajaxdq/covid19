@@ -9,7 +9,7 @@
   <app-add-country *ngIf="addC" (closeModal)="closeModal($event)" (updat)="updatd($event)" [cv]="cv" [cvApi]="cvApi" [temp]="temp"></app-add-country>
 
 
-    <div style="padding:15px;margin-top: 52px;">
+    <div style="padding:15px;">
       <label for="selector" style="padding-right:1em;">Country: </label>
       <select name="selector" (ngModelChange)="selectChangeHandler($event)" [ngModel]="cv">
         <option *ngFor="let x of cv" [ngValue]="x">{{x.Country}}</option>
