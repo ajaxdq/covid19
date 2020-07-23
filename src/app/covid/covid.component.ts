@@ -13,7 +13,6 @@ export class CovidComponent implements OnInit {
   cv2;
   show = false;
   details;
-  token = localStorage.getItem('access_token');
   alert = false;
   addC = false;
   temp;
@@ -78,8 +77,7 @@ export class CovidComponent implements OnInit {
   }
 
   fetchCountryDetails(id: any) {
-    this.token = localStorage.getItem('access_token');
-    if (this.token) {
+    if (localStorage.getItem('access_token')) {
       this.show = false;
       this.http.get<any>('https://api.covid19api.com/total/dayone/country/' + id.Slug).subscribe(data => {
         this.cv2 = data;
@@ -97,8 +95,7 @@ export class CovidComponent implements OnInit {
 
 
   fetchCountryByName(name: any) {
-    this.token = localStorage.getItem('access_token');
-    if (this.token) {
+    if (localStorage.getItem('access_token')) {
       this.show = false;
       this.http.get<any>('https://api.covid19api.com/total/dayone/country/' + name).subscribe(data => {
         this.cv2 = data;
