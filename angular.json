@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CookBook": {
+    "Covid19": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/CookBook",
+            "outputPath": "dist/Covid19",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CookBook:build"
+            "browserTarget": "Covid19:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "CookBook:build:production"
+              "browserTarget": "Covid19:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CookBook:build"
+            "browserTarget": "Covid19:build"
           }
         },
         "test": {
@@ -113,15 +113,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "CookBook:serve"
+            "devServerTarget": "Covid19:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "CookBook:serve:production"
+              "devServerTarget": "Covid19:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "CookBook"
+  "defaultProject": "Covid19"
 }
