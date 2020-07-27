@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./covid.component.css']
 })
 export class CovidComponent implements OnInit {
-  cv;
-  cvApi;
+  cv = [];
+  cvApi = [];
   cv2;
   show = false;
   details;
@@ -30,46 +30,54 @@ export class CovidComponent implements OnInit {
         this.cv = this.cvApi;
       }
       if (this.countryName) {
-        // console.log(this.countryName);
         this.fetchCountryByName(this.countryName);
       }
-    })
+    },err => {
+      console.log(err);
+  })
+    if(this.cv.length == 0){
+      this.cv = JSON.parse(localStorage.getItem('newCountries'));
+    }
   }
 
   selectChangeHandler(event: any) {
     //update the ui
     //document.getElementById("na").innerHTML = event;
-    this.fetchCountryDetails(event);
+    if(!event.Slug.startsWith('NEW_')){
+      this.fetchCountryDetails(event);
+
+    }
   }
 
   clicker(x: any) {
-    this.fetchCountryDetails(x);
-  }
+    if(!x.Slug.startsWith('NEW_')){
+      this.fetchCountryDetails(x);
+
+    }  }
 
   edit(x: any) {
     event.stopPropagation();
     this.addC = true;
     var x2 = document.getElementById("tabl");
     x2.style.display = "none";
-    let newCountries =  JSON.parse(localStorage.getItem('newCountries'));
+    let newCountries = JSON.parse(localStorage.getItem('newCountries'));
     this.temp = newCountries.find(obj => {
       return obj.Slug == x
     });
-    console.log("0",this.temp);
-
+    console.log("0", this.temp);
   }
 
   remove(x: any) {
     event.stopPropagation();
-    let newCountries =  JSON.parse(localStorage.getItem('newCountries'));
+    let newCountries = JSON.parse(localStorage.getItem('newCountries'));
     newCountries.splice(newCountries.findIndex(obj => {
       return obj.Slug == x
-    }),1);
-    localStorage.setItem('newCountries',JSON.stringify(newCountries));
+    }), 1);
+    localStorage.setItem('newCountries', JSON.stringify(newCountries));
     // console.log(result);
     if (localStorage.getItem('newCountries')) {
       this.cv = this.cvApi.concat(JSON.parse(localStorage.getItem('newCountries')));
-    } else{
+    } else {
       this.cv.pop();
     }
     // this.cv.splice(x, 1);
@@ -81,9 +89,14 @@ export class CovidComponent implements OnInit {
       this.show = false;
       this.http.get<any>('https://api.covid19api.com/total/dayone/country/' + id.Slug).subscribe(data => {
         this.cv2 = data;
+        for (let i in this.cv2) {
+          this.cv2[i].Date = this.cv2[i].Date.substring(0, 10);
+        }
         this.show = true;
         window.scrollTo(0, 0);
-      })
+      },err => {
+        console.log(err);
+    })
     } else {
       this.alert = true;
     }
@@ -99,9 +112,14 @@ export class CovidComponent implements OnInit {
       this.show = false;
       this.http.get<any>('https://api.covid19api.com/total/dayone/country/' + name).subscribe(data => {
         this.cv2 = data;
+        for (let i in this.cv2) {
+          this.cv2[i].Date = this.cv2[i].Date.substring(0, 10);
+        }
         this.show = true;
         window.scrollTo(0, 0);
-      })
+      },err => {
+        console.log(err);
+    })
     } else {
       this.alert = true;
     }
@@ -119,16 +137,17 @@ export class CovidComponent implements OnInit {
 
   closeModal(event) {
     this.temp = null;
-    console.log("2",this.cv);
+    console.log("2", this.cv);
     this.addC = event;
     var x = document.getElementById("tabl");
     x.style.display = "table";
   }
 
-  updatd(event){
-    console.log("up",event);
+  updatd(event) {
+    console.log("up", event);
     if (localStorage.getItem('newCountries')) {
       this.cv = this.cvApi.concat(JSON.parse(localStorage.getItem('newCountries')));
-    }   }
+    }
+  }
 
 }

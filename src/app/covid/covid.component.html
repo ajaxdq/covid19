@@ -28,7 +28,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">&#9961;</th>
-        <th scope="col">Country</th>
+        <th scope="col">Country </th>
         <th scope="col">NewConfirmed</th>
         <th scope="col">TotalConfirmed</th>
         <th scope="col">NewDeaths</th>
@@ -44,8 +44,8 @@
     <tbody>
       <tr *ngFor="let x of cv; index as i" (click)="clicker(x)">
         <th scope="row">{{ i + 1 }}</th>
-        <td> <img *ngIf="!x.Slug.startsWith('NEW');" src="https://www.countryflags.io/{{x.CountryCode}}/shiny/64.png" class="mr-2" style="width: 20px">
-          <img *ngIf="x.Slug.startsWith('NEW');" src="https://assets.dryicons.com/uploads/icon/svg/2672/flag.svg" class="mr-2" style="width: 20px">
+        <td> <img *ngIf="!x.Slug.startsWith('NEW_');" src="https://www.countryflags.io/{{x.CountryCode}}/shiny/64.png" class="mr-2" style="width: 20px">
+          <img *ngIf="x.Slug.startsWith('NEW_');" src="https://assets.dryicons.com/uploads/icon/svg/2672/flag.svg" class="mr-2" style="width: 20px">
         </td>
         <td>{{ x.Country }}</td>
         <td>{{ x.NewConfirmed }}</td>
@@ -54,9 +54,9 @@
         <td>{{ x.TotalDeaths }}</td>
         <td>{{ x.NewRecovered }}</td>
         <td>{{ x.TotalRecovered }}</td>
-        <td> <img *ngIf="x.Slug.startsWith('NEW');" (click)="remove(x.Slug);" [src]="'https://img.icons8.com/dusk/2x/filled-trash.png'" class="mr-2" style="width: 20px">
+        <td> <img *ngIf="x.Slug.startsWith('NEW_');" (click)="remove(x.Slug);" [src]="'https://img.icons8.com/dusk/2x/filled-trash.png'" class="mr-2" style="width: 20px">
         </td>
-        <td> <img *ngIf="x.Slug.startsWith('NEW');" (click)="edit(x.Slug);" [src]="'https://img.icons8.com/dusk/2x/edit.png'" class="mr-2" style="width: 20px">
+        <td> <img *ngIf="x.Slug.startsWith('NEW_');" (click)="edit(x.Slug);" [src]="'https://img.icons8.com/dusk/2x/edit.png'" class="mr-2" style="width: 20px">
         </td>
 
       </tr>
