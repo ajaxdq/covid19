@@ -15,26 +15,28 @@
         <option *ngFor="let x of cv" [ngValue]="x">{{x.Country}}</option>
       </select>
       <button class="btn btn-danger" style="float: right;" (click)="addCountry()"> + </button>
+      <button *ngIf="show" class="btn btn-primary" style="float: right;margin-right: 10px;" (click)="toggleChartMode()"> {{dailyChart?'Daily':'Actual'}} </button>
+      <button *ngIf="show" class="btn btn-primary" style="float: right;margin-right: 10px;" (click)="toggleChartType()"> {{chartTypeLine?'Line':'Bar'}} </button>
       <button *ngIf="show" class="btn btn-default" style="float: right;margin-right: 10px;" (click)="closeGraph()"> x </button>
 
     </div>
 
 
   <div *ngIf="show">
-    <app-country [cv2]="cv2"></app-country>
+    <app-country [cv2]="dailyChart?cv3:cv2" [chartTypeLine]="chartTypeLine"></app-country>
   </div>
   <table class="table table-striped" id="tabl">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">&#9961;</th>
-        <th scope="col">Country </th>
-        <th scope="col">NewConfirmed</th>
-        <th scope="col">TotalConfirmed</th>
-        <th scope="col">NewDeaths</th>
-        <th scope="col">TotalDeaths</th>
-        <th scope="col">NewRecovered</th>
-        <th scope="col">TotalRecovered</th>
+        <th scope="col" (click)="sortd('Country')">Country </th>
+        <th scope="col" (click)="sortd('NewConfirmed')">NewConfirmed</th>
+        <th scope="col" (click)="sortd('TotalConfirmed')">TotalConfirmed</th>
+        <th scope="col" (click)="sortd('NewDeaths')">NewDeaths</th>
+        <th scope="col" (click)="sortd('TotalDeaths')">TotalDeaths</th>
+        <th scope="col" (click)="sortd('NewRecovered')">NewRecovered</th>
+        <th scope="col" (click)="sortd('TotalRecovered')">TotalRecovered</th>
         <th scope="col"><img [src]="'https://img.icons8.com/dusk/2x/filled-trash.png'" class="mr-2" style="width: 20px"></th>
         <th scope="col"><img [src]="'https://img.icons8.com/dusk/2x/edit.png'" class="mr-2" style="width: 20px"></th>
 

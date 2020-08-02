@@ -44,14 +44,15 @@ export class CountryComponent implements OnInit {
   constructor(private activateRouter: ActivatedRoute) { }
 
   @Input() cv2: any;
+  @Input() chartTypeLine: any;
+
 
   ngOnInit(): void {
-
+    this.barChartType = this.chartTypeLine ? 'line':'bar';
     this.Confirmed = this.cv2.map(({ Confirmed }) => Confirmed);
     this.Active = this.cv2.map(({ Active }) => Active);
     this.Recovered = this.cv2.map(({ Recovered }) => Recovered);
     this.Deaths = this.cv2.map(({ Deaths }) => Deaths);
-
     this.Date = this.cv2.map(({ Date }) => Date);
     // this.Confirmed = this.Confirmed.map(String);
     // console.log(this.Confirmed);

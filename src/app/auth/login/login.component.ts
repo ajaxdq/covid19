@@ -1,6 +1,9 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -8,8 +11,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  alert = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -30,9 +34,20 @@ export class LoginComponent implements OnInit {
     //   localStorage.setItem('access_token', "jwt_token");
     //   this.router.navigateByUrl('/home');
     // }
+    this.http.get('https://covid19-edc2f.firebaseio.com/posts.json')
+      .pipe(map(responseData => {
+        const users = [];
+        for (const key in responseData) {
+          users.push({ ...responseData[key], id: key });
+        }
+        return users;
+      }
+      ))
+      .subscribe(users => {
+        console.log(users);
 
+      });
     let users = JSON.parse(localStorage.getItem('users'));
-
     let userFound = users.find(obj => {
       return (obj.email == form.controls['email'].value && obj.password == form.controls['password'].value);
     })
@@ -40,6 +55,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('access_token', "jwt_token");
       this.router.navigateByUrl('/home');
     } else {
+      this.alert = true;
 
     }
 

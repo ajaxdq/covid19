@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { HttpClient } from '@angular/common/http';
+import { response } from 'express/lib/express';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 export class RegisterComponent implements OnInit {
   signUpForm: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -24,7 +26,10 @@ export class RegisterComponent implements OnInit {
 
 
   signup() {
-    console.log(this.signUpForm.value);
+    this.http.post('https://covid19-edc2f.firebaseio.com/posts.json', this.signUpForm.value).subscribe(responseData => {
+      console.log(responseData);
+
+    });
     if (localStorage.getItem('users')) {
       let users = JSON.parse(localStorage.getItem('users'));
       users.push(this.signUpForm.value);
