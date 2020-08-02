@@ -117,7 +117,7 @@ export class CovidComponent implements OnInit {
         this.show = true;
         window.scrollTo(0, 0);
       }, err => {
-        console.log(err);
+        console.log("COuntry Not Found");
       })
     } else {
       this.alert = true;

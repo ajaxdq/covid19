@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
   constructor(private activateRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      let splashScreen = document.getElementById('splashScreenClass');
+      splashScreen.remove();
+    }, 6000);
     this.activateRouter.params.subscribe(params => {
       this.countryName = params['id'];
       // console.log("jj", this.countryName);
