@@ -13,6 +13,9 @@
             </ul> -->
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a [routerLink]="[ '/india']" role="button">India</a>
+                </li>
+                <li>
                     <a *ngIf="!token" [routerLink]="[ '/login']" role="button">Login</a>
                 </li>
                 <li>
