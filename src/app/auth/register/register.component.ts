@@ -39,6 +39,8 @@ export class RegisterComponent implements OnInit {
       users.push(this.signUpForm.value);
       localStorage.setItem('users', JSON.stringify(users));
     }
+    this.router.navigateByUrl('/login');
+
   }
 
 }
