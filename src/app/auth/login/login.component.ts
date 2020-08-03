@@ -34,20 +34,21 @@ export class LoginComponent implements OnInit {
     //   localStorage.setItem('access_token', "jwt_token");
     //   this.router.navigateByUrl('/home');
     // }
-    this.http.get('https://covid19-edc2f.firebaseio.com/posts.json')
-      .pipe(map(responseData => {
-        const users = [];
-        for (const key in responseData) {
-          users.push({ ...responseData[key], id: key });
-        }
-        return users;
-      }
-      ))
-      .subscribe(users => {
-        console.log(users);
+    // this.http.get('https://covid19-edc2f.firebaseio.com/posts.json')
+    //   .pipe(map(responseData => {
+    //     const users = [];
+    //     for (const key in responseData) {
+    //       users.push({ ...responseData[key], id: key });
+    //     }
+    //     return users;
+    //   }
+    //   ))
+    //   .subscribe(users => {
+    //     // console.log(users);
 
-      });
-    let users = JSON.parse(localStorage.getItem('users'));
+    //   });
+    let users = [];
+    users = JSON.parse(localStorage.getItem('users'));
     let userFound = users.find(obj => {
       return (obj.email == form.controls['email'].value && obj.password == form.controls['password'].value);
     })
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/home');
     } else {
       this.alert = true;
+      console.log(userFound);
 
     }
 
