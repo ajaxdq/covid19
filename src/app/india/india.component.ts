@@ -50,7 +50,7 @@ export class IndiaComponent implements OnInit {
       for (let i in this.cv2) {
         this.cv2[i].Date = this.cv2[i].Date.substring(0, 10);
       }
-      this.tot = data.pop();
+      this.tot = this.cv2[this.cv2.length-1];
     });
   }
 
