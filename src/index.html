@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <!-- <div class="splashScreenClass" id="splashScreenClass">
+  <div class="splashScreenClass" id="splashScreenClass">
     <div class="container">
       <h2 class="frame-1" id="cases"></h2>
       <h2 class="frame-2" id="deaths"></h2>
@@ -19,16 +19,16 @@
         <span>STAY SAFE</span>
       </h2>
     </div>
-  </div> -->
+  </div>
   <app-root></app-root>
 </body>
-<!-- <script>
+<script>
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", "https://corona.lmao.ninja/v2/all?yesterday", false); // false for synchronous request
   xmlHttp.send(null);
   document.getElementById('cases').innerHTML = (JSON.parse(xmlHttp.responseText).cases / 1000 << 0).toLocaleString() + ",000+ Cases";
   document.getElementById('deaths').innerHTML = (JSON.parse(xmlHttp.responseText).deaths / 1000 << 0).toLocaleString() + ",000+ Deaths";
 
-</script> -->
+</script>
 
 </html>
