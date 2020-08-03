@@ -27,6 +27,7 @@ import { CookDashComponent } from './cook-dash/cook-dash.component';
 import { PageNotFoundComponent } from './misc/page-not-found/page-not-found.component';
 import { AddCountryComponent } from './covid/add-country/add-country.component';
 import { IndiaComponent } from './india/india.component';
+import { ScrollCardComponent } from './components/scroll-card/scroll-card.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { IndiaComponent } from './india/india.component';
     CookDashComponent,
     PageNotFoundComponent,
     AddCountryComponent,
-    IndiaComponent
+    IndiaComponent,
+    ScrollCardComponent
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,7 @@ export class CountryComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.cv2)
     this.barChartType = this.chartTypeLine ? 'line':'bar';
     this.Confirmed = this.cv2.map(({ Confirmed }) => Confirmed);
     this.Active = this.cv2.map(({ Active }) => Active);
