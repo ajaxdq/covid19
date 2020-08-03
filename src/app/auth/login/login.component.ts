@@ -47,19 +47,22 @@ export class LoginComponent implements OnInit {
     //     // console.log(users);
 
     //   });
-    let users = [];
-    users = JSON.parse(localStorage.getItem('users'));
-    let userFound = users.find(obj => {
-      return (obj.email == form.controls['email'].value && obj.password == form.controls['password'].value);
-    })
-    if (userFound) {
-      localStorage.setItem('access_token', "jwt_token");
-      this.router.navigateByUrl('/home');
+    let users = JSON.parse(localStorage.getItem('users'));
+    if (users) {
+      let userFound = users.find(obj => {
+        return (obj.email == form.controls['email'].value && obj.password == form.controls['password'].value);
+      })
+      if (userFound) {
+        localStorage.setItem('access_token', "jwt_token");
+        this.router.navigateByUrl('/home');
+      } else {
+        this.alert = true;
+      }
     } else {
       this.alert = true;
-      console.log(userFound);
 
     }
+
 
   }
 
