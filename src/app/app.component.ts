@@ -12,6 +12,6 @@ export class AppComponent implements OnInit{
     setTimeout(() => {
       let splashScreen = document.getElementById('splashScreenClass');
       splashScreen.remove();
-    }, 6000);
+    }, 5500);
   }
 }

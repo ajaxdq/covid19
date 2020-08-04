@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
+  providers: [ApiService],
   selector: 'app-covid',
   templateUrl: './covid.component.html',
   styleUrls: ['./covid.component.css']
@@ -19,20 +21,22 @@ export class CovidComponent implements OnInit {
   temp;
   dailyChart = false;
   chartTypeLine = true;
-  sortCol;
+  sortCol = 'Country-d';
 
   @Input() countryName: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private dataService: ApiService) { }
 
   ngOnInit(): void {
-    this.http.get<any>('https://api.covid19api.com/summary').subscribe(data => {
+    const retrievedCountries = this.dataService.getCountries()
+    retrievedCountries.subscribe((data) => {
       this.cvApi = data.Countries;
       if (localStorage.getItem('newCountries')) {
         this.cv = this.cvApi.concat(JSON.parse(localStorage.getItem('newCountries')));
       } else {
         this.cv = this.cvApi;
       }
+      this.sortd('Country');
       if (this.countryName) {
         this.fetchCountryDetails(this.countryName);
       }
@@ -66,7 +70,7 @@ export class CovidComponent implements OnInit {
     this.temp = newCountries.find(obj => {
       return obj.Slug == x
     });
-    console.log("0", this.temp);
+    // console.log("0", this.temp);
   }
 
   remove(x: any) {
@@ -95,7 +99,10 @@ export class CovidComponent implements OnInit {
       } else {
         param = id;
       }
-      this.http.get<any>('https://api.covid19api.com/total/dayone/country/' + param).subscribe(data => {
+
+
+      const retrievedCharts = this.dataService.getCharts(param)
+      retrievedCharts.subscribe((data) => {
         this.cv2 = data;
         this.cv3 = JSON.parse(JSON.stringify(data))
         for (let i in this.cv2) {
@@ -117,7 +124,7 @@ export class CovidComponent implements OnInit {
         this.show = true;
         window.scrollTo(0, 0);
       }, err => {
-        console.log("COuntry Not Found");
+        console.log("Country Not Found");
       })
     } else {
       this.alert = true;
@@ -140,14 +147,14 @@ export class CovidComponent implements OnInit {
 
   closeModal(event) {
     this.temp = null;
-    console.log("2", this.cv);
+    // console.log("2", this.cv);
     this.addC = event;
     var x = document.getElementById("tabl");
     x.style.display = "table";
   }
 
   updatd(event) {
-    console.log("up", event);
+    // console.log("up", event);
     if (localStorage.getItem('newCountries')) {
       this.cv = this.cvApi.concat(JSON.parse(localStorage.getItem('newCountries')));
     }
@@ -174,7 +181,13 @@ export class CovidComponent implements OnInit {
     switch (str) {
       case 'Country':
         if (this.sortCol == 'Country') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.Country < b.Country)
+              return 1
+            else
+              return -1
+          })
+          this.sortCol = 'Country-d'
         } else {
           this.cv.sort((a, b) => {
             if (a.Country > b.Country)
@@ -182,13 +195,20 @@ export class CovidComponent implements OnInit {
             else
               return -1
           })
+          this.sortCol = 'Country'
         }
-        this.sortCol = 'Country'
         break;
       case 'NewConfirmed':
         if (this.sortCol == 'NewConfirmed') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.NewConfirmed < b.NewConfirmed)
+              return 1
+            else
+              return -1
+          })          
+          this.sortCol = 'NewConfirmed-d'
         } else {
+          this.sortCol = 'NewConfirmed'
           this.cv.sort((a, b) => {
             if (a.NewConfirmed > b.NewConfirmed)
               return 1
@@ -196,12 +216,18 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'NewConfirmed'
         break;
       case 'TotalConfirmed':
         if (this.sortCol == 'TotalConfirmed') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.TotalConfirmed < b.TotalConfirmed)
+              return 1
+            else
+              return -1
+          })          
+          this.sortCol = 'TotalConfirmed-d'
         } else {
+          this.sortCol = 'TotalConfirmed'
           this.cv.sort((a, b) => {
             if (a.TotalConfirmed > b.TotalConfirmed)
               return 1
@@ -209,12 +235,18 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'TotalConfirmed'
         break;
       case 'NewDeaths':
         if (this.sortCol == 'NewDeaths') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.NewDeaths < b.NewDeaths)
+              return 1
+            else
+              return -1
+          })          
+          this.sortCol = 'NewDeaths-d'
         } else {
+          this.sortCol = 'NewDeaths'
           this.cv.sort((a, b) => {
             if (a.NewDeaths > b.NewDeaths)
               return 1
@@ -222,12 +254,18 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'NewDeaths'
         break;
       case 'TotalDeaths':
         if (this.sortCol == 'TotalDeaths') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.TotalDeaths < b.TotalDeaths)
+              return 1
+            else
+              return -1
+          })          
+          this.sortCol = 'TotalDeaths-d'
         } else {
+          this.sortCol = 'TotalDeaths'
           this.cv.sort((a, b) => {
             if (a.TotalDeaths > b.TotalDeaths)
               return 1
@@ -235,12 +273,18 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'TotalDeaths'
         break;
       case 'NewRecovered':
         if (this.sortCol == 'NewRecovered') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.NewRecovered < b.NewRecovered)
+              return 1
+            else
+              return -1
+          })
+          this.sortCol = 'NewRecovered-d'
         } else {
+          this.sortCol = 'NewRecovered'
           this.cv.sort((a, b) => {
             if (a.NewRecovered > b.NewRecovered)
               return 1
@@ -248,12 +292,18 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'NewRecovered'
         break;
       case 'TotalRecovered':
         if (this.sortCol == 'TotalRecovered') {
-          this.cv.reverse();
+          this.cv.sort((a, b) => {
+            if (a.TotalRecovered < b.TotalRecovered)
+              return 1
+            else
+              return -1
+          })          
+          this.sortCol = 'TotalRecovered-d'
         } else {
+          this.sortCol = 'TotalRecovered'
           this.cv.sort((a, b) => {
             if (a.TotalRecovered > b.TotalRecovered)
               return 1
@@ -261,7 +311,6 @@ export class CovidComponent implements OnInit {
               return -1
           })
         }
-        this.sortCol = 'TotalRecovered'
         break;
 
     }
